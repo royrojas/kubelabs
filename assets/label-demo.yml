@@ -21,7 +21,7 @@ spec:
       labels:
         app: rrhh
         type: api
-        env: producction
+        env: production
         #  Revisar y corregir el error.
     spec:
       containers:

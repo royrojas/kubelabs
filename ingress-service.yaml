@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: svc-kube-1
+spec:
+  type: ClusterIP
+  selector:
+    app: pod-kube-1
+  ports:
+    - protocol: TCP
+      name: main
+      port: 80
+      targetPort: 80

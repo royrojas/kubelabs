@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: deploy-lifecycle
+spec:
+  replicas: 4
+  strategy:
+    # type: Recreate
+    type: RollingUpdate
+    rollingUpdate: # por defecto
+      maxSurge: 50%
+      maxUnavailable: 50%
+  selector:
+    matchLabels:
+      app: lifecycle
+
+  template:
+    metadata:
+      name: lifecycle-pod
+      labels:
+        app: lifecycle
+    spec:
+      containers:
+        - name: color
+          image: docker.io/kodekloud/webapp-color:v1
+          env:
+            - name: APP_COLOR
+              value: pink
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lifecycle-svc
+spec:
+  type: NodePort
+  ports:
+    - targetPort: 8080
+      port: 80
+      nodePort: 30100
+  selector:
+    app: lifecycle
+

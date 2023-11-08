@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  namespace: practica
+  name: deploy-practica-1
+  labels:
+    app: uno
+    type: frontend
+
+spec:
+  replicas: 3
+
+  template:
+    metadata:
+      name: app-uno
+      labels:
+        app: uno
+        type: frontend
+
+    spec:
+      containers:
+        - name: nginx-container
+          image: cachac/kube-labs
+
+  selector:
+    matchLabels:
+      app: uno
+      type: frontend

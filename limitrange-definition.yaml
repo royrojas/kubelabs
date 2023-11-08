@@ -1,0 +1,21 @@
+# LimitRange en cada Contenedor
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: devlimits
+  namespace: dev
+spec:
+  limits:
+    - type: Container
+      default: # limite por defecto para todos los contenedores  cuando no se indica en el manifiesto.
+        cpu: 200m
+        memory: 512Mi
+      defaultRequest: # request por defecto para todos los contenedores cuando no se indica en el manifiesto.
+        cpu: 100m
+        memory: 256Mi
+      max: # limit máximo para los contenedores con rangos en su definicion
+        cpu: 500m
+        memory: 1024Mi
+      min: # request mínimo para los contenedores con rangos en su definicion
+        cpu: 100m
+        memory: 100Mi
